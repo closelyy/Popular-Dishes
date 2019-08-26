@@ -1,15 +1,15 @@
-var mongoose = require ('mongoose');
-mongoose.connect('mongodb://localhost/db', {useNewUrlParser: true});
-const faker = require('faker');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/yelp', {useNewUrlParser: true});
+var fakeData = require('./dummy_data.js');
 
-var db = mongoose.connection;
-db.on('error', console.log.bind(console, 'connection error'));
-db.once('open', function() {
-  // we're connected!
+var yelp = mongoose.connection;
+yelp.on('error', console.log.bind(console, 'connection error'));
+yelp.once('open', function() {
+  console.log('mongoose connected!');
 });
 
 var dishesSchema = new mongoose.Schema({
-  businessId: {type: number, unique: true, dropDups: true, required: true},
+  businessId: Number,
   dishes: [{
     dishId: Number,
     imageSrc: String,
@@ -21,5 +21,21 @@ var dishesSchema = new mongoose.Schema({
 
 var Dish = mongoose.model('Dish', dishesSchema);
 
+// allData from dummy_data.js
+var docArr = fakeData.allData();
+console.log(docArr);
 
+Dish.insertMany(docArr, function(error, docs) {});
+var i = 1;
+docArr.forEach((eachDish) => {
+  dish = new Dish(eachDish);  
+  dish.save((error) => {
+    console.log('All dishes have been saved', i++);
+    if (error) {
+      console.error(error);
+    }
+  });
+}
+);
 
+module.exports = Dish;
