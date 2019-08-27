@@ -1,14 +1,14 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/yelp', {useNewUrlParser: true});
-var fakeData = require('./dummy_data.js');
+const fakeData = require('./dummy_data.js');
 
-var yelp = mongoose.connection;
+const yelp = mongoose.connection;
 yelp.on('error', console.log.bind(console, 'connection error'));
 yelp.once('open', () => {
   console.log('mongoose connected!');
 });
 
-var dishesSchema = new mongoose.Schema({
+const dishesSchema = new mongoose.Schema({
   businessId: Number,
   dishes: [{
     dishId: Number,
@@ -19,10 +19,10 @@ var dishesSchema = new mongoose.Schema({
     reviewsCount: Number}]
 });
 
-var Dish = mongoose.model('Dish', dishesSchema);
+const Dish = mongoose.model('Dish', dishesSchema);
 
 // allData from dummy_data.js
-var docArr = fakeData.allData();
+const docArr = fakeData.allData();
 console.log(docArr);
 
 let i = 1;
