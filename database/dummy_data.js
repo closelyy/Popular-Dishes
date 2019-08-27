@@ -1,18 +1,18 @@
 const faker = require('faker');
 
-var priceGenerator = (min, max) => {
-  var res = Math.random() * (max - min) + min;
+const priceGenerator = (min, max) => {
+  const res = Math.random() * (max - min) + min;
   return res.toFixed(2); 
 };
-var randomCount = (min, max) => {
-  var res = Math.random() * (max - min) + min;
+const randomCount = (min, max) => {
+  const res = Math.random() * (max - min) + min;
   return Math.floor(res); 
 };
 
-var allData = function () {
-  var allDataSet = [];
-  for (var i = 0; i < 100; i++) {
-    var oneDataSet = {
+const allData = () => {
+  const allDataSet = [];
+  for (let i = 0; i < 100; i += 1) {
+    const oneDataSet = {
       businessId: i + 1,
       dishes: [{
         dishId: 1,

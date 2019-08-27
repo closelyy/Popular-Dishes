@@ -4,7 +4,7 @@ var fakeData = require('./dummy_data.js');
 
 var yelp = mongoose.connection;
 yelp.on('error', console.log.bind(console, 'connection error'));
-yelp.once('open', function() {
+yelp.once('open', () => {
   console.log('mongoose connected!');
 });
 
@@ -25,8 +25,7 @@ var Dish = mongoose.model('Dish', dishesSchema);
 var docArr = fakeData.allData();
 console.log(docArr);
 
-Dish.insertMany(docArr, function(error, docs) {});
-var i = 1;
+let i = 1;
 docArr.forEach((eachDish) => {
   dish = new Dish(eachDish);  
   dish.save((error) => {
