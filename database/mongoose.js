@@ -25,19 +25,7 @@ const Dish = mongoose.model('Dish', dishesSchema);
 const docArr = fakeData.allData();
 
 Dish.insertMany(docArr, (err, docs) => {
-
+  // saves the input array to DB
 });
-
-// let i = 1;
-// docArr.forEach((eachDish) => {
-//   dish = new Dish(eachDish);  
-//   dish.save((error) => {
-//     console.log('All dishes have been saved', i++);
-//     if (error) {
-//       console.error(error);
-//     }
-//   });
-// }
-// );
 
 module.exports = Dish;
