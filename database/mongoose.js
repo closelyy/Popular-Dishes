@@ -23,18 +23,21 @@ const Dish = mongoose.model('Dish', dishesSchema);
 
 // allData from dummy_data.js
 const docArr = fakeData.allData();
-console.log(docArr);
 
-let i = 1;
-docArr.forEach((eachDish) => {
-  dish = new Dish(eachDish);  
-  dish.save((error) => {
-    console.log('All dishes have been saved', i++);
-    if (error) {
-      console.error(error);
-    }
-  });
-}
-);
+Dish.insertMany(docArr, (err, docs) => {
+
+});
+
+// let i = 1;
+// docArr.forEach((eachDish) => {
+//   dish = new Dish(eachDish);  
+//   dish.save((error) => {
+//     console.log('All dishes have been saved', i++);
+//     if (error) {
+//       console.error(error);
+//     }
+//   });
+// }
+// );
 
 module.exports = Dish;
